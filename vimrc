@@ -123,25 +123,12 @@ set wildignore+=*/.hg/*,*/.svn/*
 
 set nocompatible
 
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
 Plugin 'gmarik/vundle'
-
-Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'kien/ctrlp.vim'
-nnoremap <Leader>j :CtrlPBuffer<CR>
-nnoremap <Leader>o :CtrlP<CR>
-let g:ctrlp_user_command = 'ag -l --nocolor -g "" %s'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_open_multiple_files = 'jri'
-
-Plugin 'terryma/vim-expand-region'
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
 
 Plugin 'tpope/vim-fugitive'
 
@@ -162,79 +149,6 @@ set laststatus=2
 set showtabline=2
 set guioptions-=e
 
-Plugin 'jmcantrell/vim-virtualenv'
-
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
-Plugin 'klen/python-mode'
-" Python-mode
-" Keys:
-" K             Show python docs
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 0
-let g:pymode_python = 'python'
-" Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-
-"Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257', 'pylint']
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Support virtualenv
-let g:pymode_virtualenv = 1
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace()  # XXX BREAKPOINT'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-
-" Don't autofold code
-let g:pymode_folding = 0
-
-
-Plugin 'davidhalter/jedi-vim'
-" Settings for jedi-vim
-" cd ~/.vim/bundle
-" git clone git://github.com/davidhalter/jedi-vim.git
-let g:jedi#usages_command = "<leader>z"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
-" And let's use htmldjango for html files
-au BufNewFile,BufRead *.html set filetype=htmldjango
-
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
 Plugin 'rking/ag.vim'
@@ -245,7 +159,11 @@ Plugin 'tmhedberg/SimpylFold'
 " fold everything except where the cursor is
 nnoremap zh zMzv
 
-Plugin 'mattn/emmet-vim'
+Plugin 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+
+Plugin 'vim-airline/vim-airline'
 
 "This is last
 call vundle#end()
